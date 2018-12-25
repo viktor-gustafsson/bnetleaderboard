@@ -1,0 +1,30 @@
+@model BnetLeaderboard.Models.ApiResponseModels.ApiLadderResult
+@{
+    ViewData["Title"] = "Eu Leadboard";
+    var rank = 1;
+}
+<h2>Eu Leadboard</h2>
+<table style="margin: 0px auto;">
+    <th style="padding-right: 50px">Rank</th>
+    <th style="padding-right: 50px">Name</th>
+    <th style="padding-right: 50px">Race</th>
+    <th style="padding-right: 50px">MMR</th>
+    @foreach (var item in Model.LadderTeams.Take(50))
+    {
+        <tr>
+            <td>
+                @rank
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TeamMembers.FirstOrDefault().DisplayName) <br/>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TeamMembers.FirstOrDefault().FavoriteRace)<br/>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mmr)<br/>
+            </td>
+        </tr>
+        rank++;
+    }
+</table>
