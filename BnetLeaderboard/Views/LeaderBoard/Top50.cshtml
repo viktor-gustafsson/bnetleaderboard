@@ -1,15 +1,15 @@
 @model BnetLeaderboard.Models.ApiResponseModels.ApiLadderResult
 @{
-    ViewData["Title"] = Model.Region.ToUpper() + "Leadboard";
+    ViewData["Title"] = Model.Region.ToUpper() + "leader board";
     var rank = 1;
 }
-<h2>@Model.Region.ToUpper() Leadboard</h2>
+<h2>@Model.Region.ToUpper() leader board</h2>
 <table style="margin: 0px auto;">
     <th style="padding-right: 50px">Rank</th>
     <th style="padding-right: 50px">Name</th>
     <th style="padding-right: 50px">Race</th>
     <th style="padding-right: 50px">MMR</th>
-    @foreach (var item in Model.LadderTeams.Take(50))
+    @foreach (var item in Model.LadderTeams)
     {
         <tr>
             <td>

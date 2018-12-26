@@ -28,14 +28,11 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        <li>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="LeaderBoard" asp-action="Top50" asp-route-region="eu">Top 50 EU</a>
                         </li>
                         <li>
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="LeaderBoard" asp-route-region="eu">Leaderboard EU</a>
-                        </li>
-                        <li>
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="LeaderBoard" asp-route-region="us">Leaderboard US</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="LeaderBoard" asp-action="Top50" asp-route-region="us">Top 50 US</a>
                         </li>
                     </ul>
                 </div>
