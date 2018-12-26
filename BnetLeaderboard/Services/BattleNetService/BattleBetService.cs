@@ -1,4 +1,5 @@
 using System.Net.Http;
+using System.Reflection.Metadata.Ecma335;
 using System.Threading.Tasks;
 using BnetLeaderboard.Models;
 using BnetLeaderboard.Models.ApiResponseModels;
@@ -34,7 +35,10 @@ namespace BnetLeaderboard.Services.BattleNetService
 
             var result = await response.Content.ReadAsStringAsync();
 
-            return JsonConvert.DeserializeObject<ApiLadderResult>(result);
+            var apiLadderResult = JsonConvert.DeserializeObject<ApiLadderResult>(result);
+            apiLadderResult.Region = region;
+
+            return apiLadderResult;
         }
 
         private static string ConstructUrl(string region)
