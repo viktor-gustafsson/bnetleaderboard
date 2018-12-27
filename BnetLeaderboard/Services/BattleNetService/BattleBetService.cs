@@ -1,9 +1,10 @@
+using System.Linq;
 using System.Net.Http;
-using System.Reflection.Metadata.Ecma335;
 using System.Threading.Tasks;
 using BnetLeaderboard.Models;
 using BnetLeaderboard.Models.ApiResponseModels;
 using BnetLeaderboard.Services.TokenService;
+using Microsoft.AspNetCore.Http.Features;
 using Newtonsoft.Json;
 
 namespace BnetLeaderboard.Services.BattleNetService
@@ -19,6 +20,29 @@ namespace BnetLeaderboard.Services.BattleNetService
             _tokenService = tokenService;
         }
 
+        public async Task<ComparativeLadderResult> GetComparativeData()
+        {
+            var euResult = await GetLeaderBoardData("eu");
+            var usResult = await GetLeaderBoardData("us");
+
+            var result = new ComparativeLadderResult();
+            var euIndex = 0;
+
+            while (euIndex < 50)
+            {
+                var compData = new CompData
+                {
+                    EuResult = euResult.LadderTeams[euIndex],
+                    UsResult = usResult.LadderTeams[euIndex]
+                };
+                
+                result.Result.Add(compData);
+                euIndex++;
+            }
+            
+            return result;
+        }
+        
         public async Task<ApiLadderResult> GetLeaderBoardData(string region)
         {
             var url = ConstructUrl(region);

@@ -28,5 +28,12 @@ namespace BnetLeaderboard.Controllers
 
             return View(ladderResult);
         }
+
+        public async Task<IActionResult> Top50Comparison()
+        {
+            var comparativeData = await _battleNetService.GetComparativeData();
+            
+            return View(comparativeData);
+        }
     }
 }

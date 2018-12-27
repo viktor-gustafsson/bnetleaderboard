@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using BnetLeaderboard.Models;
 using BnetLeaderboard.Models.ApiResponseModels;
 
 namespace BnetLeaderboard.Services.BattleNetService
@@ -6,5 +7,6 @@ namespace BnetLeaderboard.Services.BattleNetService
     public interface IBattleNetService
     {
         Task<ApiLadderResult> GetLeaderBoardData(string region);
+        Task<ComparativeLadderResult> GetComparativeData();
     }
 }
