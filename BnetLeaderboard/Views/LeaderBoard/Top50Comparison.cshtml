@@ -9,22 +9,23 @@
 
 
 <table style="margin: 0px auto;">
-    <th style="padding-right: 50px">Rank</th>
-    <th style="padding-right: 50px">Name</th>
-    <th style="padding-right: 50px">Race</th>
-    <th style="padding-right: 50px">MMR</th>
+    <th style="padding-right: 5px">Rank</th>
+    <th style="text-align: center">Name</th>
+    <th style="text-align: center; padding-right: 30px">Race</th>
+    <th style="text-align: center">MMR</th>
+
     @foreach (var item in Model.Result)
     {
         <tr>
-            <td>
+            <td style="text-align: center">
                 @rank
             </td>
-            <td>
+            <td style="padding-right: 30px; text-align: center">
                 <img src="~/img/Eu.png" style="width: 18px; height: 18px"/> @Html.DisplayFor(modelItem => item.EuResult.TeamMembers.FirstOrDefault().NoClanName)
                 <img src="~/img/Us.png" style="width: 18px; height: 18px"/> @Html.DisplayFor(modelItem => item.UsResult.TeamMembers.FirstOrDefault().NoClanName)
                 <img src="~/img/Ko.png" style="width: 18px; height: 18px"/> @Html.DisplayFor(modelItem => item.AsiaResult.TeamMembers.FirstOrDefault().NoClanName)
             </td>
-            <td>
+            <td style="padding-right: 30px">
                 <img src="~/img/Eu.png" style="width: 18px; height: 18px"/> @Html.DisplayFor(modelItem => item.EuResult.TeamMembers.FirstOrDefault().FavoriteRace[0])
                 <img src="~/img/Us.png" style="width: 18px; height: 18px"/> @Html.DisplayFor(modelItem => item.UsResult.TeamMembers.FirstOrDefault().FavoriteRace[0])
                 <img src="~/img/Ko.png" style="width: 18px; height: 18px"/> @Html.DisplayFor(modelItem => item.AsiaResult.TeamMembers.FirstOrDefault().FavoriteRace[0])
