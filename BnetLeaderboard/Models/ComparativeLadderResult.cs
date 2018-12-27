@@ -17,6 +17,7 @@ namespace BnetLeaderboard.Models
     {
         public LadderTeam EuResult { get; set; }
         public LadderTeam UsResult { get; set; }
+        public LadderTeam AsiaResult { get; set; }
     }
 
 }

@@ -8,6 +8,8 @@ namespace BnetLeaderboard.Models.ApiResponseModels
         public int Realm { get; set; }
         public int Region { get; set; }
 
+        public string NoClanName => GetName(false);
+
         public string DisplayName
         {
             get => GetName();
@@ -21,8 +23,11 @@ namespace BnetLeaderboard.Models.ApiResponseModels
             set => _favoriteRace = value;
         }
 
-        private string GetName()
+        private string GetName(bool includeTag = true)
         {
+            if(!includeTag)
+                return _displayName;
+                
             return !string.IsNullOrEmpty(ClanTag) ? $"[{ClanTag}] {_displayName}" : _displayName;
         }
 

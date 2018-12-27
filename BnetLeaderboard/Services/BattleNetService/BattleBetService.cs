@@ -24,20 +24,22 @@ namespace BnetLeaderboard.Services.BattleNetService
         {
             var euResult = await GetLeaderBoardData("eu");
             var usResult = await GetLeaderBoardData("us");
+            var asiaResult = await GetLeaderBoardData("asia");
 
             var result = new ComparativeLadderResult();
-            var euIndex = 0;
+            var index = 0;
 
-            while (euIndex < 50)
+            while (index < 50)
             {
                 var compData = new CompData
                 {
-                    EuResult = euResult.LadderTeams[euIndex],
-                    UsResult = usResult.LadderTeams[euIndex]
+                    EuResult = euResult.LadderTeams[index],
+                    UsResult = usResult.LadderTeams[index],
+                    AsiaResult = asiaResult.LadderTeams[index]
                 };
                 
                 result.Result.Add(compData);
-                euIndex++;
+                index++;
             }
             
             return result;
@@ -67,9 +69,21 @@ namespace BnetLeaderboard.Services.BattleNetService
 
         private static string ConstructUrl(string region)
         {
-            var regionNumber = region == "us" ? 1 : 2;
+            var regionNumber = 0;
+            switch (region)
+            {
+                case "us":
+                    regionNumber = 1;
+                    break;
+                case "eu":
+                    regionNumber = 2;
+                    break;
+                case "asia":
+                    regionNumber = 3;
+                    break;
+            }
             
-            var url = $"https://{region}.{LadderUrl}/{regionNumber}?access_token=";
+            var url = $"https://eu.{LadderUrl}/{regionNumber}?access_token=";
             return url;
         }
     }

@@ -20,16 +20,19 @@
                 @rank
             </td>
             <td>
-                <img src="~/img/Eu.png" style="width: 18px; height: 18px"/>@Html.DisplayFor(modelItem => item.EuResult.TeamMembers.FirstOrDefault().DisplayName)
-                <img src="~/img/Us.png" style="width: 18px; height: 18px"/>@Html.DisplayFor(modelItem => item.UsResult.TeamMembers.FirstOrDefault().DisplayName)
+                <img src="~/img/Eu.png" style="width: 18px; height: 18px"/> @Html.DisplayFor(modelItem => item.EuResult.TeamMembers.FirstOrDefault().NoClanName)
+                <img src="~/img/Us.png" style="width: 18px; height: 18px"/> @Html.DisplayFor(modelItem => item.UsResult.TeamMembers.FirstOrDefault().NoClanName)
+                <img src="~/img/Ko.png" style="width: 18px; height: 18px"/> @Html.DisplayFor(modelItem => item.AsiaResult.TeamMembers.FirstOrDefault().NoClanName)
             </td>
             <td>
-                <img src="~/img/Eu.png" style="width: 18px; height: 18px"/>@Html.DisplayFor(modelItem => item.EuResult.TeamMembers.FirstOrDefault().FavoriteRace)
-                <img src="~/img/Us.png" style="width: 18px; height: 18px"/>@Html.DisplayFor(modelItem => item.UsResult.TeamMembers.FirstOrDefault().FavoriteRace)
+                <img src="~/img/Eu.png" style="width: 18px; height: 18px"/> @Html.DisplayFor(modelItem => item.EuResult.TeamMembers.FirstOrDefault().FavoriteRace[0])
+                <img src="~/img/Us.png" style="width: 18px; height: 18px"/> @Html.DisplayFor(modelItem => item.UsResult.TeamMembers.FirstOrDefault().FavoriteRace[0])
+                <img src="~/img/Ko.png" style="width: 18px; height: 18px"/> @Html.DisplayFor(modelItem => item.AsiaResult.TeamMembers.FirstOrDefault().FavoriteRace[0])
             </td>
             <td>
-                <img src="~/img/Eu.png" style="width: 18px; height: 18px"/>@Html.DisplayFor(modelItem => item.EuResult.Mmr)
-                <img src="~/img/Us.png" style="width: 18px; height: 18px"/>@Html.DisplayFor(modelItem => item.UsResult.Mmr)
+                <img src="~/img/Eu.png" style="width: 18px; height: 18px"/> @Html.DisplayFor(modelItem => item.EuResult.Mmr)
+                <img src="~/img/Us.png" style="width: 18px; height: 18px"/> @Html.DisplayFor(modelItem => item.UsResult.Mmr)
+                <img src="~/img/Ko.png" style="width: 18px; height: 18px"/> @Html.DisplayFor(modelItem => item.AsiaResult.Mmr)
             </td>
         </tr>
         rank++;
