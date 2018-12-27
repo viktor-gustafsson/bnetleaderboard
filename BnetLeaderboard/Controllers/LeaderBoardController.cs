@@ -1,6 +1,6 @@
 using System.Linq;
 using System.Threading.Tasks;
-using BnetLeaderboard.Models.ApiResponseModels;
+using BnetLeaderboard.Models.ResourceModels;
 using BnetLeaderboard.Services.BattleNetService;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,7 +20,7 @@ namespace BnetLeaderboard.Controllers
         {
             var apiLadderResult = await _battleNetService.GetLeaderBoardData(region);
 
-            var ladderResult = new ApiLadderResult
+            var ladderResult = new RegionLadderResult
             {
                 Region = region,
                 LadderTeams = apiLadderResult.LadderTeams.Take(50).ToList()

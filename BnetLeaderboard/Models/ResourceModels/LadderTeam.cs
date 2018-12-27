@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace BnetLeaderboard.Models.ApiResponseModels
+namespace BnetLeaderboard.Models.ResourceModels
 {
     public class LadderTeam
     {

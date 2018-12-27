@@ -2,7 +2,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using BnetLeaderboard.Models;
-using BnetLeaderboard.Models.ApiResponseModels;
+using BnetLeaderboard.Models.ResourceModels;
 using BnetLeaderboard.Services.TokenService;
 using Microsoft.AspNetCore.Http.Features;
 using Newtonsoft.Json;
@@ -31,40 +31,47 @@ namespace BnetLeaderboard.Services.BattleNetService
 
             while (index < 50)
             {
-                var compData = new CompData
+                var compData = new RegionalData
                 {
                     EuResult = euResult.LadderTeams[index],
                     UsResult = usResult.LadderTeams[index],
                     AsiaResult = asiaResult.LadderTeams[index]
                 };
-                
+
                 result.Result.Add(compData);
                 index++;
             }
-            
+
             return result;
         }
-        
-        public async Task<ApiLadderResult> GetLeaderBoardData(string region)
+
+        public async Task<RegionLadderResult> GetLeaderBoardData(string region, int limit = 0)
         {
             var url = ConstructUrl(region);
             var token = await _tokenService.GetToken();
             _httpClient = new HttpClient();
 
             var uri = $"{url}{token.AccessToken}";
-            
+
             var response = await _httpClient.GetAsync(uri);
             if (!response.IsSuccessStatusCode)
             {
                 throw new HttpRequestException();
             }
 
-            var result = await response.Content.ReadAsStringAsync();
+            var content = await response.Content.ReadAsStringAsync();
 
-            var apiLadderResult = JsonConvert.DeserializeObject<ApiLadderResult>(result);
-            apiLadderResult.Region = region;
+            var apiLadderResult = JsonConvert.DeserializeObject<RegionLadderResult>(content);
 
-            return apiLadderResult;
+            var ladderResult = new RegionLadderResult
+            {
+                Region = region,
+                LadderTeams = limit == 0
+                    ? apiLadderResult.LadderTeams
+                    : apiLadderResult.LadderTeams.Take(limit).ToList()
+            };
+
+            return ladderResult;
         }
 
         private static string ConstructUrl(string region)
@@ -82,7 +89,7 @@ namespace BnetLeaderboard.Services.BattleNetService
                     regionNumber = 3;
                     break;
             }
-            
+
             var url = $"https://eu.{LadderUrl}/{regionNumber}?access_token=";
             return url;
         }
