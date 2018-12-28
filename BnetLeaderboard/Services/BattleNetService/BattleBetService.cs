@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using BnetLeaderboard.Models;
 using BnetLeaderboard.Models.DomainModels;
+using BnetLeaderboard.Models.Enums;
 using BnetLeaderboard.Models.ResourceModels;
 using BnetLeaderboard.Services.TokenService;
 using Microsoft.AspNetCore.Http.Features;
@@ -24,9 +25,9 @@ namespace BnetLeaderboard.Services.BattleNetService
 
         public async Task<ComparativeLadderResult> GetComparativeData()
         {
-            var euResult = await GetLeaderBoardData("eu", 50);
-            var usResult = await GetLeaderBoardData("us", 50);
-            var asiaResult = await GetLeaderBoardData("asia", 50);
+            var euResult = await GetLeaderBoardData(Region.Eu, 50);
+            var usResult = await GetLeaderBoardData(Region.Us, 50);
+            var asiaResult = await GetLeaderBoardData(Region.Asia, 50);
 
             var result = new ComparativeLadderResult
             {
@@ -38,18 +39,19 @@ namespace BnetLeaderboard.Services.BattleNetService
             return result;
         }
 
-        public async Task<RegionLadderResult> GetLeaderBoardData(string region, int limit = 0)
+        public async Task<RegionLadderResult> GetLeaderBoardData(Region region, int limit = 0)
         {
-            var url = ConstructUrl(region);
-            var token = await _tokenService.GetToken();
             _httpClient = new HttpClient();
-
+            
+            var token = await _tokenService.GetToken();
+            var url = ConstructUrl(region);
             var uri = $"{url}{token.AccessToken}";
 
             var response = await _httpClient.GetAsync(uri);
+            
             if (!response.IsSuccessStatusCode)
             {
-                throw new HttpRequestException();
+                throw new HttpRequestException(response.ReasonPhrase);
             }
 
             var content = await response.Content.ReadAsStringAsync();
@@ -58,7 +60,7 @@ namespace BnetLeaderboard.Services.BattleNetService
 
             var ladderResult = new RegionLadderResult
             {
-                Region = region,
+                Region = region.ToString(),
                 Players = limit == 0
                     ? apiLadderResult.LadderTeams.Select(Player.Convert).ToList()
                     : apiLadderResult.LadderTeams.Select(Player.Convert).Take(limit).ToList()
@@ -67,23 +69,9 @@ namespace BnetLeaderboard.Services.BattleNetService
             return ladderResult;
         }
 
-        private static string ConstructUrl(string region)
+        private static string ConstructUrl(Region region)
         {
-            var regionNumber = 0;
-            switch (region)
-            {
-                case "us":
-                    regionNumber = 1;
-                    break;
-                case "eu":
-                    regionNumber = 2;
-                    break;
-                case "asia":
-                    regionNumber = 3;
-                    break;
-            }
-
-            var url = $"https://eu.{LadderUrl}/{regionNumber}?access_token=";
+            var url = $"https://eu.{LadderUrl}/{(int)region}?access_token=";
             return url;
         }
     }

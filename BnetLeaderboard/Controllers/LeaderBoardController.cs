@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Threading.Tasks;
+using BnetLeaderboard.Models.Enums;
 using BnetLeaderboard.Models.ResourceModels;
 using BnetLeaderboard.Services.BattleNetService;
 using Microsoft.AspNetCore.Mvc;
@@ -16,7 +17,7 @@ namespace BnetLeaderboard.Controllers
         }
 
 
-        public async Task<IActionResult> Top50(string region)
+        public async Task<IActionResult> Top50(Region region)
         {
             var apiLadderResult = await _battleNetService.GetLeaderBoardData(region);
 
