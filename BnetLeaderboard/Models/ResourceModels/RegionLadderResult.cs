@@ -5,6 +5,6 @@ namespace BnetLeaderboard.Models.ResourceModels
     public class RegionLadderResult
     {
         public string Region { get; set; }
-        public List<LadderTeam> LadderTeams { get; set; }
+        public List<Player> Players { get; set; }
     }
 }

@@ -1,41 +1,42 @@
 @model BnetLeaderboard.Models.ResourceModels.ComparativeLadderResult
-
 @{
-    ViewBag.Title = "Comparative Ladder Results";
-    var rank = 1;
+     ViewBag.Title = "Comparative Ladder Results";
+     var rank = 1;
+     var index = 0;
 }
 
 <h2>Comparative Ladder Results</h2>
 
 
 <table style="margin: 0px auto;">
-    <th style="padding-right: 5px">Rank</th>
-    <th style="text-align: center">Name</th>
-    <th style="text-align: center; padding-right: 30px">Race</th>
-    <th style="text-align: center">MMR</th>
+     <th style="padding-right: 5px">Rank</th>
+     <th style="text-align: center">Name</th>
+     <th style="text-align: center; padding-right: 30px">Race</th>
+     <th style="text-align: center">MMR</th>
 
-    @foreach (var item in Model.Result)
+    @while (index < Model.EuPlayers.Count)
     {
         <tr>
             <td style="text-align: center">
                 @rank
             </td>
             <td style="padding-right: 30px; text-align: center">
-                <img src="~/img/Eu.png" style="width: 18px; height: 18px"/> @Html.DisplayFor(modelItem => item.EuResult.TeamMembers.FirstOrDefault().NoClanName)
-                <img src="~/img/Us.png" style="width: 18px; height: 18px"/> @Html.DisplayFor(modelItem => item.UsResult.TeamMembers.FirstOrDefault().NoClanName)
-                <img src="~/img/Ko.png" style="width: 18px; height: 18px"/> @Html.DisplayFor(modelItem => item.AsiaResult.TeamMembers.FirstOrDefault().NoClanName)
+                <img src="~/img/Eu.png" style="width: 18px; height: 18px"/> @Html.DisplayFor(modelItem => Model.EuPlayers[index].NoClanName)
+                <img src="~/img/Us.png" style="width: 18px; height: 18px"/> @Html.DisplayFor(modelItem => Model.UsPlayers[index].NoClanName)
+                <img src="~/img/Ko.png" style="width: 18px; height: 18px"/> @Html.DisplayFor(modelItem => Model.AsiaPlayers[index].NoClanName)
             </td>
             <td style="padding-right: 30px">
-                <img src="~/img/Eu.png" style="width: 18px; height: 18px"/> @Html.DisplayFor(modelItem => item.EuResult.TeamMembers.FirstOrDefault().FavoriteRace[0])
-                <img src="~/img/Us.png" style="width: 18px; height: 18px"/> @Html.DisplayFor(modelItem => item.UsResult.TeamMembers.FirstOrDefault().FavoriteRace[0])
-                <img src="~/img/Ko.png" style="width: 18px; height: 18px"/> @Html.DisplayFor(modelItem => item.AsiaResult.TeamMembers.FirstOrDefault().FavoriteRace[0])
+                <img src="~/img/Eu.png" style="width: 18px; height: 18px"/> @Html.DisplayFor(modelItem => Model.EuPlayers[index].FavoriteRace[0])
+                <img src="~/img/Us.png" style="width: 18px; height: 18px"/> @Html.DisplayFor(modelItem => Model.UsPlayers[index].FavoriteRace[0])
+                <img src="~/img/Ko.png" style="width: 18px; height: 18px"/> @Html.DisplayFor(modelItem => Model.AsiaPlayers[index].FavoriteRace[0])
             </td>
             <td>
-                <img src="~/img/Eu.png" style="width: 18px; height: 18px"/> @Html.DisplayFor(modelItem => item.EuResult.Mmr)
-                <img src="~/img/Us.png" style="width: 18px; height: 18px"/> @Html.DisplayFor(modelItem => item.UsResult.Mmr)
-                <img src="~/img/Ko.png" style="width: 18px; height: 18px"/> @Html.DisplayFor(modelItem => item.AsiaResult.Mmr)
+                <img src="~/img/Eu.png" style="width: 18px; height: 18px"/> @Html.DisplayFor(modelItem => Model.EuPlayers[index].Mmr)
+                <img src="~/img/Us.png" style="width: 18px; height: 18px"/> @Html.DisplayFor(modelItem => Model.UsPlayers[index].Mmr)
+                <img src="~/img/Ko.png" style="width: 18px; height: 18px"/> @Html.DisplayFor(modelItem => Model.AsiaPlayers[index].Mmr)
             </td>
         </tr>
         rank++;
+        index++;
     }
 </table>

@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using System.Linq;
+using BnetLeaderboard.Models.ResourceModels;
 
-namespace BnetLeaderboard.Models.ResourceModels
+namespace BnetLeaderboard.Models.DomainModels
 {
     public class LadderTeam
     {

@@ -20,13 +20,7 @@ namespace BnetLeaderboard.Controllers
         {
             var apiLadderResult = await _battleNetService.GetLeaderBoardData(region);
 
-            var ladderResult = new RegionLadderResult
-            {
-                Region = region,
-                LadderTeams = apiLadderResult.LadderTeams.Take(50).ToList()
-            };
-
-            return View(ladderResult);
+            return View(apiLadderResult);
         }
 
         public async Task<IActionResult> Top50Comparison()

@@ -4,11 +4,9 @@ namespace BnetLeaderboard.Models.ResourceModels
 {
     public class ComparativeLadderResult
     {
-        public List<RegionalData> Result { get; set; }
-
-        public ComparativeLadderResult()
-        {
-            Result = new List<RegionalData>();
-        }
+        public List<Player> EuPlayers { get; set; }
+        public List<Player> UsPlayers { get; set; }
+        public List<Player> AsiaPlayers { get; set; }
+        
     }
 }

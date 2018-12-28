@@ -9,20 +9,20 @@
     <th style="padding-right: 50px">Name</th>
     <th style="padding-right: 50px">Race</th>
     <th style="padding-right: 50px">MMR</th>
-    @foreach (var item in Model.LadderTeams)
+    @foreach (var player in Model.Players)
     {
         <tr>
             <td>
                 @rank
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TeamMembers.FirstOrDefault().DisplayName) <br/>
+                @Html.DisplayFor(modelItem => player.DisplayName) <br/>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TeamMembers.FirstOrDefault().FavoriteRace)<br/>
+                @Html.DisplayFor(modelItem => player.FavoriteRace)<br/>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Mmr)<br/>
+                @Html.DisplayFor(modelItem => player.Mmr)<br/>
             </td>
         </tr>
         rank++;

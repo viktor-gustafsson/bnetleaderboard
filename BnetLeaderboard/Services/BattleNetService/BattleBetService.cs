@@ -1,7 +1,9 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using BnetLeaderboard.Models;
+using BnetLeaderboard.Models.DomainModels;
 using BnetLeaderboard.Models.ResourceModels;
 using BnetLeaderboard.Services.TokenService;
 using Microsoft.AspNetCore.Http.Features;
@@ -22,25 +24,16 @@ namespace BnetLeaderboard.Services.BattleNetService
 
         public async Task<ComparativeLadderResult> GetComparativeData()
         {
-            var euResult = await GetLeaderBoardData("eu");
-            var usResult = await GetLeaderBoardData("us");
-            var asiaResult = await GetLeaderBoardData("asia");
+            var euResult = await GetLeaderBoardData("eu", 50);
+            var usResult = await GetLeaderBoardData("us", 50);
+            var asiaResult = await GetLeaderBoardData("asia", 50);
 
-            var result = new ComparativeLadderResult();
-            var index = 0;
-
-            while (index < 50)
+            var result = new ComparativeLadderResult
             {
-                var compData = new RegionalData
-                {
-                    EuResult = euResult.LadderTeams[index],
-                    UsResult = usResult.LadderTeams[index],
-                    AsiaResult = asiaResult.LadderTeams[index]
-                };
-
-                result.Result.Add(compData);
-                index++;
-            }
+                EuPlayers = euResult.Players,
+                UsPlayers = usResult.Players,
+                AsiaPlayers = asiaResult.Players
+            };
 
             return result;
         }
@@ -61,14 +54,14 @@ namespace BnetLeaderboard.Services.BattleNetService
 
             var content = await response.Content.ReadAsStringAsync();
 
-            var apiLadderResult = JsonConvert.DeserializeObject<RegionLadderResult>(content);
+            var apiLadderResult = JsonConvert.DeserializeObject<RootObject>(content);
 
             var ladderResult = new RegionLadderResult
             {
                 Region = region,
-                LadderTeams = limit == 0
-                    ? apiLadderResult.LadderTeams
-                    : apiLadderResult.LadderTeams.Take(limit).ToList()
+                Players = limit == 0
+                    ? apiLadderResult.LadderTeams.Select(Player.Convert).ToList()
+                    : apiLadderResult.LadderTeams.Select(Player.Convert).Take(limit).ToList()
             };
 
             return ladderResult;
