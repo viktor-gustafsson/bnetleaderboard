@@ -17,7 +17,7 @@
 
     @while (index < Model.EuPlayers.Count)
     {
-        <tr>
+        <tr style="background-color: @Model.EuPlayers[index].RaceColor">
             <td>
                 @rank
             </td>
@@ -34,9 +34,8 @@
                 <img src="~/img/Eu.png" style="width: 18px; height: 18px"/> @Html.DisplayFor(modelItem => Model.EuPlayers[index].WinRate)
             </td>
         </tr>
-        <tr>
+        <tr style="background-color: @Model.AsiaPlayers[index].RaceColor">
             <td>
-                @rank
             </td>
             <td style="padding-right: 30px">
                 <img src="~/img/Ko.png" style="width: 18px; height: 18px"/> @Html.DisplayFor(modelItem => Model.AsiaPlayers[index].DisplayName)
@@ -51,9 +50,8 @@
                 <img src="~/img/Ko.png" style="width: 18px; height: 18px"/> @Html.DisplayFor(modelItem => Model.AsiaPlayers[index].WinRate)
             </td>
         </tr>
-        <tr>
+        <tr style="background-color: @Model.UsPlayers[index].RaceColor; border-bottom: 2px solid black">
             <td>
-                @rank
             </td>
             <td style="padding-right: 30px">
                 <img src="~/img/Us.png" style="width: 18px; height: 18px"/> @Html.DisplayFor(modelItem => Model.UsPlayers[index].DisplayName)
