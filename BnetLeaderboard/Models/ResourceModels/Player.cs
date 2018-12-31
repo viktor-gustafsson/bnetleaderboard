@@ -30,6 +30,22 @@ namespace BnetLeaderboard.Models.ResourceModels
 
         public decimal WinRate => GetWinRate();
 
+        public string RaceColor => GetRaceColor();
+
+        private string GetRaceColor()
+        {
+            switch (GetRace())
+            {
+                case "Protoss":
+                    return "#b8f2b8";
+                case "Terran":
+                    return "#b8b8f2";
+                case "Zerg":
+                    return "#f2b8b8";
+            }
+            return "white";
+        }
+
         private decimal GetWinRate()
         {
             var totalGames = Wins + Losses;

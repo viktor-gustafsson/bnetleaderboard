@@ -12,20 +12,7 @@
     <th style="padding-right: 50px">Win%</th>
     @foreach (var player in Model.Players)
     {
-        string Color(string race)
-        {
-            switch (race)
-            {
-                case "Protoss":
-                    return "#b8f2b8";
-                case "Terran":
-                    return "#b8b8f2";
-                case "Zerg":
-                    return "#f2b8b8";
-            }
-            return "white";
-        };
-        <tr style="background-color: @Color(player.FavoriteRace)">
+        <tr style="background-color: @player.RaceColor">
             <td>
                 @rank
             </td>
