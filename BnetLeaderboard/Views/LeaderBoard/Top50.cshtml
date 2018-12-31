@@ -9,6 +9,7 @@
     <th style="padding-right: 50px">Name</th>
     <th style="padding-right: 50px">Race</th>
     <th style="padding-right: 50px">MMR</th>
+    <th style="padding-right: 50px">Win%</th>
     @foreach (var player in Model.Players)
     {
         <tr>
@@ -23,6 +24,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => player.Mmr)<br/>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => player.WinRate)<br/>
             </td>
         </tr>
         rank++;

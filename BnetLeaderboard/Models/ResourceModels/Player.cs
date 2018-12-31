@@ -27,8 +27,19 @@ namespace BnetLeaderboard.Models.ResourceModels
         public int Losses { get; set; }
         public int Mmr { get; set; }
         public int JoinTimestamp { get; set; }
-        
-        
+
+        public decimal WinRate => GetWinRate();
+
+        private decimal GetWinRate()
+        {
+            var totalGames = Wins + Losses;
+
+            var winRate = ((decimal) Wins / totalGames) * 100;
+            
+            return winRate;
+        }
+
+
         public string NoClanName => GetName(false);
 
         private string GetName(bool includeTag = true)
